@@ -32,9 +32,12 @@ exports.register = async (req, res) => {
 
 // ================= LOGIN =================
 exports.login = (req, res) => {
-  const email = req.body.email?.trim();
-  const password = req.body.password?.trim();
+  console.log("========== LOGIN ==========");
+  console.log("HEADERS:", req.headers);
+  console.log("BODY:", req.body);
 
+  const email = req.body?.email?.trim();
+  const password = req.body?.password?.trim();
   // Validasi input
   if (!email || !password) {
     return res.status(400).json({
