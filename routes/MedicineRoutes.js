@@ -7,7 +7,7 @@ const {
   createMedicine,
   updateMedicine,
   deleteMedicine,
-} = require("../controllers/medicineController");
+} = require("../controllers/MedicineController");
 
 const { verifyToken, checkRole } = require("../middleware/authMiddleware");
 

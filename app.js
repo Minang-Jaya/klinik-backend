@@ -13,7 +13,7 @@ const pengajuanRoutes = require("./routes/pengajuanRoutes");
 const antrianRoutes = require("./routes/antrianRoutes");
 const pemeriksaanRoutes = require("./routes/pemeriksaanRoutes");
 const userRoutes = require("./routes/userRoutes");
-const medicineRoutes = require("./routes/medicineRoutes");
+const medicineRoutes = require("./routes/MedicineRoutes");
 const notificationRoutes = require("./routes/notificationRoutes");
 
 const { verifyToken, checkRole } = require("./middleware/authMiddleware");
