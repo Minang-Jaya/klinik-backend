@@ -6,10 +6,12 @@ exports.createUser = async (req, res) => {
   const {
     nama,
     nik,
+    jenis_kelamin,
     divisi,
     spesialisasi,
     email,
     no_hp,
+    no_bpjs,
     alamat,
     kelurahan,
     kecamatan,
@@ -22,7 +24,15 @@ exports.createUser = async (req, res) => {
   } = req.body;
 
   // ================= VALIDASI FIELD =================
-  if (!nama || !nik || !email || !no_hp || !password || !role) {
+  if (
+    !nama ||
+    !nik ||
+    !jenis_kelamin ||
+    !email ||
+    !no_hp ||
+    !password ||
+    !role
+  ) {
     return res.status(400).json({
       message: "Semua field wajib diisi",
     });
@@ -78,10 +88,12 @@ exports.createUser = async (req, res) => {
         (
           nama,
           nik,
+          jenis_kelamin,
           divisi,
           spesialisasi,
           email,
           no_hp,
+          no_bpjs,
           alamat,
           kelurahan,
           kecamatan,
@@ -92,7 +104,7 @@ exports.createUser = async (req, res) => {
           password,
           role
         )
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
       `;
 
       db.query(
@@ -100,10 +112,12 @@ exports.createUser = async (req, res) => {
         [
           nama,
           nik,
+          jenis_kelamin,
           divisi,
           spesialisasi,
           email,
           no_hp,
+          role === "karyawan" ? no_bpjs : null,
           alamat,
           kelurahan,
           kecamatan,
@@ -142,10 +156,12 @@ exports.getAllUsers = (req, res) => {
       id,
       nama,
       nik,
+      jenis_kelamin,
       divisi,
       spesialisasi,
       email,
       no_hp,
+      no_bpjs,
       alamat,
       kelurahan,
       kecamatan,
@@ -199,10 +215,12 @@ exports.updateUser = async (req, res) => {
   const {
     nama,
     nik,
+    jenis_kelamin,
     divisi,
     spesialisasi,
     email,
     no_hp,
+    no_bpjs,
     alamat,
     kelurahan,
     kecamatan,
@@ -213,9 +231,8 @@ exports.updateUser = async (req, res) => {
     password,
     role,
   } = req.body;
-
   // ================= VALIDASI FIELD =================
-  if (!nama || !nik || !email || !no_hp || !role) {
+  if (!nama || !nik || !jenis_kelamin || !email || !no_hp || !role) {
     return res.status(400).json({
       message: "Semua field wajib diisi",
     });
@@ -292,10 +309,12 @@ exports.updateUser = async (req, res) => {
             SET
               nama = ?,
               nik = ?,
+              jenis_kelamin = ?,
               divisi = ?,
               spesialisasi = ?,
               email = ?,
               no_hp = ?,
+              no_bpjs = ?,
               alamat = ?,
               kelurahan = ?,
               kecamatan = ?,
@@ -313,10 +332,12 @@ exports.updateUser = async (req, res) => {
                 [
                   nama,
                   nik,
+                  jenis_kelamin,
                   divisi,
                   spesialisasi,
                   email,
                   no_hp,
+                  role === "karyawan" ? no_bpjs : null,
                   alamat,
                   kelurahan,
                   kecamatan,
@@ -350,10 +371,12 @@ exports.updateUser = async (req, res) => {
           SET
             nama = ?,
             nik = ?,
+            jenis_kelamin = ?,
             divisi = ?,
             spesialisasi = ?,
             email = ?,
             no_hp = ?,
+            no_bpjs = ?,
             alamat = ?,
             kelurahan = ?,
             kecamatan = ?,
@@ -370,10 +393,12 @@ exports.updateUser = async (req, res) => {
               [
                 nama,
                 nik,
+                jenis_kelamin,
                 divisi,
                 spesialisasi,
                 email,
                 no_hp,
+                role === "karyawan" ? no_bpjs : null,
                 alamat,
                 kelurahan,
                 kecamatan,
